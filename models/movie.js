@@ -1,7 +1,7 @@
 const {Schema, model} = require("mongoose");
 const Joi = require("joi");
 
-const {handleMongooseError} = require("../utils");
+const handleMongooseError = require('./handleMongooseError')
 
 const genreList = ["fantastic", "love story"];
 const releaseDateRegexp = /^\d{4}$/;

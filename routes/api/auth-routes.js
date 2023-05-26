@@ -6,6 +6,11 @@ const Router = require("../../classes/Router");
 
 
 class AuthRoutes extends Router {
+    constructor(){
+        super()
+        this.initRouter()
+    }
+
     initRouter(){
         this.router.post("/register", this.validateBody(schemas.userRegisterSchema), authControllers.register)
 
@@ -15,6 +20,10 @@ class AuthRoutes extends Router {
 
         this.router.post("/logout", this.authenticate, authControllers.logout);
     }
+    
+    getRouter () {
+        return this.router;
+      }
 }
 
-module.exports = new AuthRoutes().router;
+module.exports = new AuthRoutes();

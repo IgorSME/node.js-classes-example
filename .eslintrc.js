@@ -7,6 +7,8 @@ module.exports = {
   extends: ['standard', 'prettier'],
   parserOptions: {
     ecmaVersion: 12,
+    
   },
+  "parser": "babel-eslint",
   rules: {},
 }

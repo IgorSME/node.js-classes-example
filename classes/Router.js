@@ -2,12 +2,12 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const {isValidObjectId} = require("mongoose");
 const {User} = require('../models/user');
-const Controller = require("./Controller");
 
 const {SECRET_KEY} = process.env;
 
-class Router extends Controller {
+class Router {
     constructor() {
+        
         this.router = express.Router();
     }
 
@@ -48,7 +48,7 @@ class Router extends Controller {
     isValidId = (req, res, next)=> {
         const {id} = req.params;
         if(!isValidObjectId(id)) {
-            next(HttpError(404, `${id} is not valid id`))
+            next(this.createError(404, `${id} is not valid id`))
         }
     
         next();

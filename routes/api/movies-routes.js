@@ -5,9 +5,12 @@ const {schemas} = require("../../models/movie");
 
 const Router = require("../../classes/Router");
 
-
 class MoviesRoutes extends Router {
   
+constructor(){
+    super()
+    this.initRouter()
+}
 
     initRouter(){
         this.router.use(this.authenticate)
@@ -20,8 +23,12 @@ class MoviesRoutes extends Router {
         this.router.patch("/:id/favorite", this.isValidId, this.validateBody(schemas.updateFavoriteMovieSchema))
 
         this.router.delete("/:id", this.isValidId, moviesController.deleteMovieById)
+
     }
+
+    getRouter () {
+        return this.router;
+      }
 }
 
-
-module.exports = new MoviesRoutes().router;
+module.exports =new MoviesRoutes();

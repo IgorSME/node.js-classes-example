@@ -40,7 +40,7 @@ class MovieController extends Controller {
         const { id } = req.params;
         const result = await Movie.findByIdAndUpdate(id, req.body, {new: true});
         if (!result) {
-            throw HttpError(404, `Movie with id=${id} not found`);
+            throw this.createError(404, `Movie with id=${id} not found`);
         }
     
         res.json(result);
@@ -50,7 +50,7 @@ class MovieController extends Controller {
         const { id } = req.params;
         const result = await Movie.findByIdAndUpdate(id, req.body, {new: true});
         if (!result) {
-            throw HttpError(404, `Movie with id=${id} not found`);
+            throw this.createError(404, `Movie with id=${id} not found`);
         }
     
         res.json(result);
@@ -60,7 +60,7 @@ class MovieController extends Controller {
         const { id } = req.params;
         const result = await Movie.findByIdAndDelete(id);
         if (!result) {
-            throw HttpError(404, `Movie with id=${id} not found`);
+            throw this.createError(404, `Movie with id=${id} not found`);
         }
     
         res.json({

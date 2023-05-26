@@ -1,5 +1,3 @@
-
-
 class Controller {
     static messagesList = {
         400: "Bad Request",
