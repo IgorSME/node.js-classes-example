@@ -33,17 +33,6 @@ class Router {
         }
     }
 
-    validateBody = schema => {
-        const func = (req, res, next) => {
-            const { error } = schema.validate(req.body);
-            if (error) {
-                next(this.createError(400, error.message));
-            }
-            next()
-        };
-    
-        return func;
-    }
 
     isValidId = (req, res, next)=> {
         const {id} = req.params;

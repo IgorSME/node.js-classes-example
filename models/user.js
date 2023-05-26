@@ -5,6 +5,7 @@ const handleMongooseError = require("./handleMongooseError");
 
 const emailRegexp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
+
 const userSchema = new Schema({
     name: {
         type: String,
@@ -40,9 +41,22 @@ const userLoginSchema = Joi.object({
     password: Joi.string().min(6).required(),
 });
 
+const  validateBody = schema => {
+    const func = (req, res, next) => {
+        const { error } = schema.validate(req.body);
+        if (error) {
+            next(this.createError(400, error.message));
+        }
+        next()
+    };
+
+    return func;
+}
+
+
 const schemas = {
-    userRegisterSchema,
-    userLoginSchema,
+    validatedUserRegisterBody : validateBody(userRegisterSchema),
+    validatedUserLoginBody: validateBody(userLoginSchema),
 };
 
 const User = model("user", userSchema);

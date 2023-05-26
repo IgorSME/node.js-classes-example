@@ -12,9 +12,9 @@ class AuthRoutes extends Router {
     }
 
     initRouter(){
-        this.router.post("/register", this.validateBody(schemas.userRegisterSchema), authControllers.register)
+        this.router.post("/register", schemas.validatedUserRegisterBody, authControllers.register)
 
-        this.router.post("/login", this.validateBody(schemas.userLoginSchema), authControllers.login);
+        this.router.post("/login", schemas.validatedUserLoginBody, authControllers.login);
 
         this.router.get("/current", this.authenticate, authControllers.getCurrent);
 

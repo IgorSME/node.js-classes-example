@@ -17,10 +17,10 @@ constructor(){
 
         this.router.get("/",  moviesController.getAll)
         this.router.get("/:id",this.isValidId, moviesController.getById)
-        this.router.post("/", this.validateBody(schemas.movieAddSchema), moviesController.addMovie)
+        this.router.post("/", schemas.validatedMovieAddBody, moviesController.addMovie)
 
-        this.router.put("/:id", this.isValidId, this.validateBody(schemas.updateMovieById), moviesController.updateMovieById)
-        this.router.patch("/:id/favorite", this.isValidId, this.validateBody(schemas.updateFavoriteMovieSchema))
+        this.router.put("/:id", this.isValidId, schemas.validatedMovieUpdateBody, moviesController.updateMovieById)
+        this.router.patch("/:id/favorite", this.isValidId, schemas.validatedMovieUpdateBody, moviesController.updateMovieFavorite)
 
         this.router.delete("/:id", this.isValidId, moviesController.deleteMovieById)
 

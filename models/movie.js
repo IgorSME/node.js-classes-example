@@ -53,9 +53,21 @@ const updateFavoriteMovieSchema = Joi.object({
     favorite: Joi.boolean().required()
 })
 
+const validateBody = schema => {
+    const func = (req, res, next) => {
+        const { error } = schema.validate(req.body);
+        if (error) {
+            next(this.createError(400, error.message));
+        }
+        next()
+    };
+
+    return func;
+}
+
 const schemas = {
-    movieAddSchema,
-    updateFavoriteMovieSchema,
+    validatedMovieAddBody : validateBody(movieAddSchema),
+    validatedMovieUpdateBody : validateBody(updateFavoriteMovieSchema),
 }
 
 const Movie = model("movie", movieSchema);
